@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  market-data:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: ["sh", "-c", "pip install debugpy -t /tmp && python /tmp/debugpy --listen 0.0.0.0:6078 -m uvicorn main:app --host 0.0.0.0 --port 80"]
+    ports:
+      - 6079:80
+      - 6078:6078

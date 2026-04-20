@@ -1,0 +1,28 @@
+version: '3.4'
+name: market-data
+
+services:
+  market-data:
+    container_name: market-data
+    image: market-data
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 8001:80
+    restart: always
+    networks:
+      - market
+    environment:
+      - TZ=Europe/Athens
+      - MainBiddingZone=10YGR-HTSO-----Y
+    volumes:
+      - market-data:/usr/share/market_data
+networks:
+  market:
+    external: true
+
+volumes:
+  market-data:
+    external: true
+    name: "MarketData"
